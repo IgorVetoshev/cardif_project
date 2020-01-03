@@ -34,8 +34,8 @@ import datetime
 import numpy as np
 import skimage.draw
 
-import warnings
-warnings.filterwarnings("ignore")
+#import warnings
+#warnings.filterwarnings("ignore")
 
 # Root directory of the project
 ROOT_DIR = ROOT_DIR = os.getcwd()
