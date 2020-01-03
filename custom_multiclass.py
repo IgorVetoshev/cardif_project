@@ -34,6 +34,9 @@ import datetime
 import numpy as np
 import skimage.draw
 
+import warnings
+warnings.filterwarnings("ignore")
+
 # Root directory of the project
 ROOT_DIR = ROOT_DIR = os.getcwd()
 
@@ -63,7 +66,7 @@ class CustomConfig(Config):
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 2
+    IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 22  # Background + 5 classes (rear bump, front bump, headlamp, door, hood)
