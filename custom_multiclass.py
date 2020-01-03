@@ -70,8 +70,8 @@ class CustomConfig(Config):
 
     # Use smaller images for faster training. Set the limits of the small side
     # the large side, and that determines the image shape.
-    IMAGE_MIN_DIM = 1
-    IMAGE_MAX_DIM = 5000
+    IMAGE_MIN_DIM = 64
+    IMAGE_MAX_DIM = 2048
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 100
