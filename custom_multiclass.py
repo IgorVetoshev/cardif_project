@@ -230,7 +230,7 @@ class CustomDataset(utils.Dataset):
         """
         # If not a balloon dataset image, delegate to parent class.
         image_info = self.image_info[image_id]
-        if image_info["part"] != "balloon":
+        if image_info["source"] != "part":
             return super(self.__class__, self).load_mask(image_id)
 
         info = self.image_info[image_id]
