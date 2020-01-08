@@ -246,7 +246,7 @@ class CustomDataset(utils.Dataset):
         # print("info['num_ids']=", info['num_ids'])
         # Map class names to class IDs.
         num_ids = info['num_ids']
-        return mask.astype(np.bool), num_ids.astype(np.int32)
+        return np.array(mask).astype(np.bool), np.array(num_ids).astype(np.int32) #array
 
     def image_reference(self, image_id):
         """Return the path of the image."""
