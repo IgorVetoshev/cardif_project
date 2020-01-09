@@ -2356,12 +2356,11 @@ class MaskRCNN():
         # Work-around for Windows: Keras fails on Windows when using
         # multiprocessing workers. See discussion here:
         # https://github.com/matterport/Mask_RCNN/issues/13#issuecomment-353124009
-        #if os.name is 'nt':
-            #workers = 0
-        #else:
-            #workers = multiprocessing.cpu_count() #changed
+        if os.name is 'nt':
+            workers = 0
+        else:
+            workers = multiprocessing.cpu_count() #notchanged
         
-        workers=1
 
         self.keras_model.fit_generator(
             train_generator,
@@ -2373,7 +2372,7 @@ class MaskRCNN():
             validation_steps=self.config.VALIDATION_STEPS,
             max_queue_size=100,
             workers=workers,
-            use_multiprocessing=False, #changed
+            use_multiprocessing=True, #notchanged
         )
         self.epoch = max(self.epoch, epochs)
 
