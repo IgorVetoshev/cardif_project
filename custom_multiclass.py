@@ -280,8 +280,8 @@ def train(model):
                 epochs=10,
                 layers='heads')
     
-    model_path = 'weights\\mask_rcnn_'  + '.' + str(time.time()) + '.h5'  #changed
-    model.keras_model.save_weights(model_path)                            #changed
+    model_path = 'mask_rcnn_weights' + '.h5'   #changed
+    model.keras_model.save_weights(model_path) #changed
 
 
 def color_splash(image, mask):
