@@ -33,6 +33,7 @@ import json
 import datetime
 import numpy as np
 import skimage.draw
+import time
 
 #import warnings
 #warnings.filterwarnings("ignore")
@@ -278,6 +279,9 @@ def train(model):
                 learning_rate=config.LEARNING_RATE,
                 epochs=10,
                 layers='heads')
+    
+    model_path = 'weights\\mask_rcnn_'  + '.' + str(time.time()) + '.h5'  #changed
+    model.keras_model.save_weights(model_path)                            #changed
 
 
 def color_splash(image, mask):
