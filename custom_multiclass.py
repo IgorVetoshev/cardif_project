@@ -78,7 +78,7 @@ class CustomConfig(Config):
     IMAGE_MAX_DIM = 2048
 
     # Number of training steps per epoch
-    STEPS_PER_EPOCH = 100
+    STEPS_PER_EPOCH = 150
 
     # Skip detections with < 80% confidence
     DETECTION_MIN_CONFIDENCE = 0.8
@@ -277,7 +277,7 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
+                epochs=50, #changed
                 layers='heads')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
