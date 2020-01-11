@@ -4,7 +4,6 @@ Multi-GPU Support for Keras.
 
 Copyright (c) 2017 Matterport, Inc.
 Licensed under the MIT License (see LICENSE for details)
-Written by Waleed Abdulla
 
 Ideas and a small code snippets from these sources:
 https://github.com/fchollet/keras/issues/2436
