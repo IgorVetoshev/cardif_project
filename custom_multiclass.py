@@ -61,8 +61,8 @@ class CustomConfig(Config):
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 150
 
-    # Skip detections with < 80% confidence
-    DETECTION_MIN_CONFIDENCE = 0.8
+    # Skip detections with < 40% confidence
+    DETECTION_MIN_CONFIDENCE = 0.4
 
 
 ############################################################
