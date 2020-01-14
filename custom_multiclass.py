@@ -253,16 +253,15 @@ def train(model):
     dataset_val.load_custom(args.dataset, "val")
     dataset_val.prepare()
     
-    imgaug.augmenters
     
-    augmantation = imgaug.Sometimes(5/6,aug.OneOf(
+    augmantation = imgaug.augmenters.Sometimes(5/6,aug.OneOf(
                                             [
-                                                iaa.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),       
-                                                iaa.SaltAndPepper(p=0.1),
-                                                iaa.AdditiveGaussianNoise(scale=1),
-                                                iaa.CoarseDropout(0.1, size_px=1),
-                                                iaa.AddToHueAndSaturation((-50, 50)),
-                                                iaa.Fliplr(1.0)
+                                                imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),       
+                                                imgaug.augmenters.SaltAndPepper(p=0.1),
+                                                imgaug.augmenters.AdditiveGaussianNoise(scale=1),
+                                                imgaug.augmenters.CoarseDropout(0.1, size_px=1),
+                                                imgaug.augmenters.AddToHueAndSaturation((-50, 50)),
+                                                imgaug.augmenters.Fliplr(1.0)
                                              ]
                                         )
                                    )
