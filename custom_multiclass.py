@@ -254,7 +254,7 @@ def train(model):
     dataset_val.prepare()
     
     
-    augmantation = imgaug.augmenters.Sometimes(5/6,aug.OneOf(
+    augmentation = imgaug.augmenters.Sometimes(5/6,aug.OneOf(
                                             [
                                                 imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),       
                                                 imgaug.augmenters.SaltAndPepper(p=0.1),
