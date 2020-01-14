@@ -15,6 +15,8 @@ import datetime
 import numpy as np
 import skimage.draw
 import time
+import imgaug
+from imgaug import augmenters as aug
 
 #import warnings
 #warnings.filterwarnings("ignore")
@@ -59,7 +61,7 @@ class CustomConfig(Config):
     IMAGE_MAX_DIM = 2048
 
     # Number of training steps per epoch
-    STEPS_PER_EPOCH = 150
+    STEPS_PER_EPOCH = 100
 
     # Skip detections with < 40% confidence
     DETECTION_MIN_CONFIDENCE = 0.4
@@ -250,6 +252,20 @@ def train(model):
     dataset_val = CustomDataset()
     dataset_val.load_custom(args.dataset, "val")
     dataset_val.prepare()
+    
+    imgaug.augmenters
+    
+    augmantation = imgaug.Sometimes(5/6,aug.OneOf(
+                                            [
+                                                iaa.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),       
+                                                iaa.SaltAndPepper(p=0.1),
+                                                iaa.AdditiveGaussianNoise(scale=1),
+                                                iaa.CoarseDropout(0.1, size_px=1),
+                                                iaa.AddToHueAndSaturation((-50, 50)),
+                                                iaa.Fliplr(1.0)
+                                             ]
+                                        )
+                                   )
 
     # *** This training schedule is an example. Update to your needs ***
     # Since we're using a very small dataset, and starting from
@@ -259,7 +275,8 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=50, #changed
-                layers='heads')
+                layers='heads',
+                augmentation=augmentation)
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
