@@ -256,13 +256,13 @@ def train(model):
     
     augmentation = imgaug.augmenters.Sometimes(7/8,aug.OneOf(
                                             [
-                                            iaa.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),   #поворот    
-                                            iaa.AdditiveGaussianNoise(scale=5), #шум
-                                            iaa.CoarseDropout(p=0.1, size_percent=0.1),   #черные блоки
-                                            iaa.AddToHueAndSaturation((-50, 50)),  #пятна цвета
-                                            iaa.Fliplr(1.0),                      #отражание на 180
-                                            iaa.AverageBlur(k=8),                 ##блюр
-                                            iaa.CropAndPad(percent=(-0.05, 0.1), pad_mode=ia.ALL, pad_cval=(0, 255)) 
+                                            imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),   #поворот    
+                                            imgaug.augmenters.AdditiveGaussianNoise(scale=5), #шум
+                                            imgaug.augmenters.CoarseDropout(p=0.1, size_percent=0.1),   #черные блоки
+                                            imgaug.augmenters.AddToHueAndSaturation((-50, 50)),  #пятна цвета
+                                            imgaug.augmenters.Fliplr(1.0),                      #отражание на 180
+                                            imgaug.augmenters.AverageBlur(k=8),                 ##блюр
+                                            imgaug.augmenters.CropAndPad(percent=(-0.05, 0.1), pad_mode=ia.ALL, pad_cval=(0, 255)) 
                                              ]
                                         )
                                    )
