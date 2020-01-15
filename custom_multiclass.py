@@ -254,14 +254,15 @@ def train(model):
     dataset_val.prepare()
     
     
-    augmentation = imgaug.augmenters.Sometimes(6/7,aug.OneOf(
+    augmentation = imgaug.augmenters.Sometimes(7/8,aug.OneOf(
                                             [
-                                            iaa.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10))   #поворот    
-                                            iaa.AdditiveGaussianNoise(scale=5) #шум
-                                            iaa.CoarseDropout(p=0.1, size_percent=0.1)   #черные блоки
-                                            iaa.AddToHueAndSaturation((-50, 50))  #пятна цвета
-                                            iaa.Fliplr(1.0)                      #отражание на 180
-                                            iaa.AverageBlur(k=8)                 #блюр
+                                            iaa.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),   #поворот    
+                                            iaa.AdditiveGaussianNoise(scale=5), #шум
+                                            iaa.CoarseDropout(p=0.1, size_percent=0.1),   #черные блоки
+                                            iaa.AddToHueAndSaturation((-50, 50)),  #пятна цвета
+                                            iaa.Fliplr(1.0),                      #отражание на 180
+                                            iaa.AverageBlur(k=8),                 ##блюр
+                                            iaa.CropAndPad(percent=(-0.05, 0.1), pad_mode=ia.ALL, pad_cval=(0, 255)) 
                                              ]
                                         )
                                    )
@@ -275,7 +276,8 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=30, #changed
-                layers='heads')
+                layers='heads',
+                augmentation = augmentation)
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
