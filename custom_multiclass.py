@@ -262,7 +262,7 @@ def train(model):
                                             imgaug.augmenters.AddToHueAndSaturation((-50, 50)),  #пятна цвета
                                             imgaug.augmenters.Fliplr(1.0),                      #отражание на 180
                                             imgaug.augmenters.AverageBlur(k=8),                 ##блюр
-                                            imgaug.augmenters.CropAndPad(percent=(-0.05, 0.1), pad_mode=ia.ALL, pad_cval=(0, 255)) 
+                                            imgaug.augmenters.CropAndPad(percent=(-0.05, 0.1), pad_cval=(0, 255)) 
                                              ]
                                         )
                                    )
