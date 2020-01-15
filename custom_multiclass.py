@@ -253,7 +253,7 @@ def train(model):
     dataset_val.load_custom(args.dataset, "val")
     dataset_val.prepare()
     
-    
+    '''
     augmentation = imgaug.augmenters.Sometimes(5/6,aug.OneOf(
                                             [
                                                 imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),       
@@ -265,7 +265,8 @@ def train(model):
                                              ]
                                         )
                                    )
-
+    '''
+    
     # *** This training schedule is an example. Update to your needs ***
     # Since we're using a very small dataset, and starting from
     # COCO trained weights, we don't need to train too long. Also,
@@ -273,9 +274,8 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=50, #changed
-                layers='heads',
-                augmentation=augmentation)
+                epochs=10, #changed
+                layers='heads')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
