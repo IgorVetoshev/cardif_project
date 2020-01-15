@@ -253,19 +253,19 @@ def train(model):
     dataset_val.load_custom(args.dataset, "val")
     dataset_val.prepare()
     
-    '''
-    augmentation = imgaug.augmenters.Sometimes(5/6,aug.OneOf(
+    
+    augmentation = imgaug.augmenters.Sometimes(6/7,aug.OneOf(
                                             [
-                                                imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),       
-                                                imgaug.augmenters.SaltAndPepper(p=0.1),
-                                                imgaug.augmenters.AdditiveGaussianNoise(scale=1),
-                                                imgaug.augmenters.CoarseDropout(0.1, size_px=1),
-                                                imgaug.augmenters.AddToHueAndSaturation((-50, 50)),
-                                                imgaug.augmenters.Fliplr(1.0)
+                                            iaa.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10))   #поворот    
+                                            iaa.AdditiveGaussianNoise(scale=5) #шум
+                                            iaa.CoarseDropout(p=0.1, size_percent=0.1)   #черные блоки
+                                            iaa.AddToHueAndSaturation((-50, 50))  #пятна цвета
+                                            iaa.Fliplr(1.0)                      #отражание на 180
+                                            iaa.AverageBlur(k=8)                 #блюр
                                              ]
                                         )
                                    )
-    '''
+    
     
     # *** This training schedule is an example. Update to your needs ***
     # Since we're using a very small dataset, and starting from
@@ -275,7 +275,7 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=30, #changed
-                layers='3+')
+                layers='heads')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
