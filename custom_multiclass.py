@@ -53,7 +53,7 @@ class CustomConfig(Config):
     IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 8  # Background + 5 classes (rear bump, front bump, headlamp, door, hood)
+    NUM_CLASSES = 1 + 9  # Background + 5 classes (rear bump, front bump, headlamp, door, hood)
 
     # Use smaller images for faster training. Set the limits of the small side
     # the large side, and that determines the image shape.
@@ -85,10 +85,10 @@ class CustomDataset(utils.Dataset):
         self.add_class("part", 4, "front_back_window")
         self.add_class("part", 5, "side_window")
         self.add_class("part", 6, "rearview_mirror")
-        self.add_class("part", 7, "scratch")
-        self.add_class("part", 8, "dent")
-        '''
         self.add_class("part", 7, "broken_headlamp")
+        self.add_class("part", 8, "scratch")
+        self.add_class("part", 9, "dent")
+        '''
         self.add_class("part", 8, "bumper_light")
         self.add_class("part", 9, "bumper_moderate")
         self.add_class("part", 10, "bumper_severe")
@@ -161,10 +161,12 @@ class CustomDataset(utils.Dataset):
                         num_ids.append(5)
                     elif n['name'] == 'rearview_mirror':
                         num_ids.append(6)
-                    elif n['name'] == 'scratch':
+                    elif n['name'] == 'broken_headlamp':
                         num_ids.append(7)
-                    elif n['name'] == 'dent':
+                    elif n['name'] == 'scratch':
                         num_ids.append(8)
+                    elif n['name'] == 'dent':
+                        num_ids.append(9)
 
                     '''
                     elif n['name'] == 'broken_headlamp':
