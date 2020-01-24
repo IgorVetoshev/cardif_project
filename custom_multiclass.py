@@ -64,7 +64,7 @@ class CustomConfig(Config):
     STEPS_PER_EPOCH = 100
 
     # Skip detections with < 60% confidence
-    DETECTION_MIN_CONFIDENCE = 0.6
+    DETECTION_MIN_CONFIDENCE = 0.5
 
 
 ############################################################
@@ -288,7 +288,7 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=30, #changed
-                layers='heads')
+                layers='4+')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
