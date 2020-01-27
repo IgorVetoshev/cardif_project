@@ -4,6 +4,7 @@ Base Configurations class.
 
 Copyright (c) 2017 Matterport, Inc.
 Licensed under the MIT License (see LICENSE for details)
+Written by Waleed Abdulla
 """
 
 import numpy as np
@@ -44,7 +45,7 @@ class Config(object):
     # Number of validation steps to run at the end of every training epoch.
     # A bigger number improves accuracy of validation stats, but slows
     # down the training.
-    VALIDATION_STEPS = 60
+    VALIDATION_STEPS = 50
 
     # Backbone network architecture
     # Supported values are: resnet50, resnet101.
@@ -85,7 +86,7 @@ class Config(object):
 
     # Non-max suppression threshold to filter RPN proposals.
     # You can increase this during training to generate more propsals.
-    RPN_NMS_THRESHOLD = 0.3
+    RPN_NMS_THRESHOLD = 0.7
 
     # How many anchors per image to use for RPN training
     RPN_TRAIN_ANCHORS_PER_IMAGE = 256
@@ -171,7 +172,7 @@ class Config(object):
     DETECTION_MIN_CONFIDENCE = 0.7
 
     # Non-maximum suppression threshold for detection
-    DETECTION_NMS_THRESHOLD = 0.7
+    DETECTION_NMS_THRESHOLD = 0.3
 
     # Learning rate and momentum
     # The Mask RCNN paper uses lr=0.02, but on TensorFlow it causes
