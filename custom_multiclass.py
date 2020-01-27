@@ -64,7 +64,7 @@ class CustomConfig(Config):
     STEPS_PER_EPOCH = 100
 
     # Skip detections with < 50% confidence
-    DETECTION_MIN_CONFIDENCE = 0.5
+    DETECTION_MIN_CONFIDENCE = 0.6
 
 
 ############################################################
