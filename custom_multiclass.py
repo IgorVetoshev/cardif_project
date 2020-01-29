@@ -284,7 +284,7 @@ def train(model):
     augmentation = imgaug.augmenters.Sometimes(2/3,aug.OneOf(
                                             [
                                             imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),   #поворот    
-                                            imgaug.augmenters.Crop(percent=sample([0.1,0.125,0.15,0.175,0.2],k=1)[0]                #кроппинг
+                                            imgaug.augmenters.Crop(percent=sample([0.1,0.125,0.15,0.175,0.2],k=1)[0])                #кроппинг
                                              ]
                                         )
                                    )
