@@ -17,6 +17,7 @@ import skimage.draw
 import time
 import imgaug
 from imgaug import augmenters as aug
+from random import sample
 
 #import warnings
 #warnings.filterwarnings("ignore")
@@ -280,6 +281,14 @@ def train(model):
                                    )
     
     '''
+    augmentation = imgaug.augmenters.Sometimes(2/3,aug.OneOf(
+                                            [
+                                            imgaug.augmenters.Affine(translate_percent={"x": 0.05, "y": 0.05}, rotate=(-10, 10)),   #поворот    
+                                            imgaug.augmenters.Crop(percent=sample([0.1,0.125,0.15,0.175,0.2],k=1)[0]                #кроппинг
+                                             ]
+                                        )
+                                   )
+    
     # *** This training schedule is an example. Update to your needs ***
     # Since we're using a very small dataset, and starting from
     # COCO trained weights, we don't need to train too long. Also,
@@ -288,7 +297,7 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=30, #changed
-                layers='3+')
+                layers='4+')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
