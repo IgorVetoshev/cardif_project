@@ -164,14 +164,12 @@ class CustomDataset(utils.Dataset):
                         num_ids.append(6)
                     elif n['name'] == 'broken_headlamp':
                         num_ids.append(7)
-                    elif n['name'] == 'scratch':
-                        num_ids.append(8)
-                    elif n['name'] == 'dent':
-                        num_ids.append(9)
+                    #elif n['name'] == 'scratch':
+                    #    num_ids.append(8)
+                    #elif n['name'] == 'dent':
+                    #    num_ids.append(9)
 
-                    '''
-                    elif n['name'] == 'broken_headlamp':
-                        num_ids.append(7)
+                    
                     elif n['name'] == 'bumper_light':
                         num_ids.append(8)
                     elif n['name'] == 'bumper_moderate':
@@ -200,7 +198,7 @@ class CustomDataset(utils.Dataset):
                         num_ids.append(20)
                     elif n['name'] == 'trunk_severe':
                         num_ids.append(21)
-                    '''
+                    
                 except:
                     pass
             # load_mask() needs the image size to convert polygons to masks.
@@ -298,7 +296,7 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=30, #changed
-                layers='heads')
+                layers='4+')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
