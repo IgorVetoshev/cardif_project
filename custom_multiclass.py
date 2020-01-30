@@ -87,9 +87,10 @@ class CustomDataset(utils.Dataset):
         self.add_class("part", 5, "side_window")
         self.add_class("part", 6, "rearview_mirror")
         self.add_class("part", 7, "broken_headlamp")
-        self.add_class("part", 8, "scratch")
-        self.add_class("part", 9, "dent")
-        '''
+        
+        #self.add_class("part", 8, "scratch")
+        #self.add_class("part", 9, "dent")
+        
         self.add_class("part", 8, "bumper_light")
         self.add_class("part", 9, "bumper_moderate")
         self.add_class("part", 10, "bumper_severe")
@@ -104,7 +105,7 @@ class CustomDataset(utils.Dataset):
         self.add_class("part", 19, "wing_severe")
         self.add_class("part", 20, "trunk_moderate")
         self.add_class("part", 21, "trunk_severe")
-        '''
+        
         
 
         # Train or validation dataset?
@@ -164,11 +165,11 @@ class CustomDataset(utils.Dataset):
                         num_ids.append(6)
                     elif n['name'] == 'broken_headlamp':
                         num_ids.append(7)
+                        
                     #elif n['name'] == 'scratch':
                     #    num_ids.append(8)
                     #elif n['name'] == 'dent':
                     #    num_ids.append(9)
-
                     
                     elif n['name'] == 'bumper_light':
                         num_ids.append(8)
