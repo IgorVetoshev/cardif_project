@@ -18,6 +18,7 @@ import time
 import imgaug
 from imgaug import augmenters as aug
 from random import sample
+import pickle #changed
 
 #import warnings
 #warnings.filterwarnings("ignore")
@@ -413,9 +414,12 @@ if __name__ == '__main__':
     # Validate arguments
     if args.command == "train":
         assert args.dataset, "Argument --dataset is required for training"
-    elif args.command == "splash":
-        assert args.image or args.video,\
-               "Provide --image or --video to apply color splash"
+    elif args.command == "inference":
+        assert args.dataset, "Argument --dataset is required for inference"  #changed
+    
+    #elif args.command == "splash":                                         #changed
+        #assert args.image or args.video,\                                  #changed
+               #"Provide --image or --video to apply color splash"          #changed
 
     print("Weights: ", args.weights)
     print("Dataset: ", args.dataset)
@@ -470,9 +474,26 @@ if __name__ == '__main__':
     # Train or evaluate
     if args.command == "train":
         train(model)
+    
+    #changed
+    '''
     elif args.command == "splash":
         detect_and_color_splash(model, image_path=args.image,
                                 video_path=args.video)
     else:
         print("'{}' is not recognized. "
               "Use 'train' or 'splash'".format(args.command))
+    '''
+    
+    elif args.command == "inference":
+        paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
+        total_results = []
+        for image_path in paths:
+            image = skimage.io.imread(image_path)
+            results = model.detect([image], verbose=1)
+            total_results.append(results)
+            
+        pickle.dump(total_results, open( "total_results.pickle", "wb" ) )
+        
+        
+    
