@@ -489,6 +489,7 @@ if __name__ == '__main__':
         paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
         total_results = []
         for image_path in paths:
+            print(image_path)
             image = skimage.io.imread(image_path)
             results = model.detect([image], verbose=1)
             total_results.append(results)
