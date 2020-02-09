@@ -55,7 +55,7 @@ class CustomConfig(Config):
     IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 21  # Background + 5 classes (rear bump, front bump, headlamp, door, hood)
+    NUM_CLASSES = 1 + 1  # Background + 5 classes (rear bump, front bump, headlamp, door, hood)
 
     # Use smaller images for faster training. Set the limits of the small side
     # the large side, and that determines the image shape.
@@ -82,7 +82,8 @@ class CustomDataset(utils.Dataset):
         """
         # Add classes. We have only one class to add.
         self.add_class("part", 1, "total")
-        
+        #comment
+        '''
         self.add_class("part", 2, "flat_tire")
         self.add_class("part", 3, "corrosion")
         self.add_class("part", 4, "front_back_window")
@@ -108,7 +109,7 @@ class CustomDataset(utils.Dataset):
         self.add_class("part", 20, "trunk_moderate")
         self.add_class("part", 21, "trunk_severe")
         
-        
+        '''
 
         # Train or validation dataset?
         assert subset in ["train", "val", "test", "test_new"]                   #assert subset in ["train", "val"] 
@@ -156,7 +157,7 @@ class CustomDataset(utils.Dataset):
                     if n['name'] == 'total':
                         num_ids.append(1)
                         
-                    
+                    '''
                     elif n['name'] == 'flat_tire':
                         num_ids.append(2)
                     elif n['name'] == 'corrosion':
@@ -204,7 +205,7 @@ class CustomDataset(utils.Dataset):
                     elif n['name'] == 'trunk_severe':
                         num_ids.append(21)
                     
-                    
+                    '''
                 except:
                     pass
             # load_mask() needs the image size to convert polygons to masks.
