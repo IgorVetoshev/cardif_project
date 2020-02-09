@@ -60,7 +60,7 @@ class CustomConfig(Config):
     # Use smaller images for faster training. Set the limits of the small side
     # the large side, and that determines the image shape.
     IMAGE_MIN_DIM = 64
-    IMAGE_MAX_DIM = 2048
+    IMAGE_MAX_DIM = 4096
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 100
@@ -488,7 +488,11 @@ if __name__ == '__main__':
     elif args.command == "inference":
         paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
         total_results = []
+        i=0
         for image_path in paths:
+            print('--------------------------------------------------------------')
+            i+=1
+            print(i)
             print(image_path)
             image = skimage.io.imread(image_path)
             results = model.detect([image], verbose=1)
