@@ -307,9 +307,12 @@ if __name__ == '__main__':
     # Validate arguments
     if args.command == "train":
         assert args.dataset, "Argument --dataset is required for training"
+        
+    '''
     elif args.command == "splash":
         assert args.image or args.video,\
                "Provide --image or --video to apply color splash"
+    '''
 
     print("Weights: ", args.weights)
     print("Dataset: ", args.dataset)
@@ -367,7 +370,7 @@ if __name__ == '__main__':
     elif args.command == "splash":
         paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
         for image_path in paths:
-            detect_and_color_splash(model, image_path=image,
+            detect_and_color_splash(model, image_path=image_path,
                                 video_path=args.video)
     else:
         print("'{}' is not recognized. "
