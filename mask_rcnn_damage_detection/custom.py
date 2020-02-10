@@ -197,6 +197,9 @@ def train(model):
                 learning_rate=config.LEARNING_RATE,
                 epochs=10,
                 layers='heads')
+                
+    model_path = 'mask_rcnn_weights' + '.h5'   #changed
+    model.keras_model.save_weights(model_path) #changed
 
 
 def color_splash(image, mask):
