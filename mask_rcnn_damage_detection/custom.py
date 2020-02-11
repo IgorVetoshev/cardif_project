@@ -372,6 +372,25 @@ if __name__ == '__main__':
         for image_path in paths:
             detect_and_color_splash(model, image_path=image_path,
                                 video_path=args.video)
+    elif args.command == "inference":
+        paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
+        total_results = []
+        i=0
+        for image_path in paths:
+            print('--------------------------------------------------------------')
+            i+=1
+            print(i)
+            print(image_path)
+            image = skimage.io.imread(image_path)
+            results = model.detect([image], verbose=1)
+            total_results.append(results)
+            
+        pickle.dump(total_results, open( "total_results.pickle", "wb" ) )
+    
+    '''
     else:
         print("'{}' is not recognized. "
               "Use 'train' or 'splash'".format(args.command))
+    '''
+              
+           
