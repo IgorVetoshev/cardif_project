@@ -37,8 +37,6 @@ import cv2
 from mrcnn.visualize import display_instances
 import matplotlib.pyplot as plt
 import pickle
-from importlib import reload
-reload(visualize)
 
 def get_ax(rows=1, cols=1, size=16):
     """Return a Matplotlib Axes array to be used in
@@ -401,7 +399,7 @@ if __name__ == '__main__':
             
             ax = get_ax(1)
             r = results[0]
-            visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
+            display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                                         class_names, r['scores'], ax=ax,
                                         title="Predictions")
             
