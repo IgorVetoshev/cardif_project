@@ -207,8 +207,8 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
-                layers='heads')
+                epochs=20,
+                layers='4+')
                 
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
     model.keras_model.save_weights(model_path) #changed
