@@ -37,6 +37,19 @@ import cv2
 from mrcnn.visualize import display_instances
 import matplotlib.pyplot as plt
 import pickle
+from importlib import reload
+reload(visualize)
+
+def get_ax(rows=1, cols=1, size=16):
+    """Return a Matplotlib Axes array to be used in
+    all visualizations in the notebook. Provide a
+    central point to control graph sizes.
+    
+    Adjust the size attribute to control how big to render images
+    """
+    _, ax = plt.subplots(rows, cols, figsize=(size*cols, size*rows))
+    return ax
+
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -377,6 +390,7 @@ if __name__ == '__main__':
         paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
         total_results = []
         i=0
+        class_names = ['BG', 'total']
         for image_path in paths:
             print('--------------------------------------------------------------')
             i+=1
@@ -384,7 +398,14 @@ if __name__ == '__main__':
             print(image_path)
             image = skimage.io.imread(image_path)
             results = model.detect([image], verbose=1)
-            total_results.append(results)
+            
+            ax = get_ax(1)
+            r = results[0]
+            visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
+                                        class_names, r['scores'], ax=ax,
+                                        title="Predictions")
+            
+            total_results.append(r)
             
         pickle.dump(total_results, open( "total_results.pickle", "wb" ) )
     
