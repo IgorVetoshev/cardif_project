@@ -302,7 +302,7 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=30, #changed
+                epochs=50, #changed
                 layers='4+')
     
     model_path = 'mask_rcnn_weights' + '.h5'   #changed
@@ -475,21 +475,17 @@ if __name__ == '__main__':
     # Train or evaluate
     if args.command == "train":
         train(model)
-    
-        #changed
-        '''
-        elif args.command == "splash":
-            detect_and_color_splash(model, image_path=args.image,
-                                    video_path=args.video)
-        else:
-            print("'{}' is not recognized. "
-                  "Use 'train' or 'splash'".format(args.command))
-        '''
-    
+        
+    elif args.command == "splash":
+        paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
+        for image_path in paths:
+            detect_and_color_splash(model, image_path=image_path,
+                                video_path=args.video)
     elif args.command == "inference":
         paths = [os.path.join(args.dataset, file_path) for file_path in os.listdir(args.dataset)]
         total_results = []
         i=0
+        class_names = ['BG', 'total']
         for image_path in paths:
             print('--------------------------------------------------------------')
             i+=1
@@ -497,9 +493,21 @@ if __name__ == '__main__':
             print(image_path)
             image = skimage.io.imread(image_path)
             results = model.detect([image], verbose=1)
-            total_results.append(results)
+            
+            ax = get_ax(1)
+            r = results[0]
+            display_instances(image, r['rois'], r['masks'], r['class_ids'], 
+                                        class_names, r['scores'], ax=ax,
+                                        title="Predictions")
+            
+            total_results.append(r)
             
         pickle.dump(total_results, open( "total_results.pickle", "wb" ) )
-        
-        
     
+    '''
+    else:
+        print("'{}' is not recognized. "
+              "Use 'train' or 'splash'".format(args.command))
+        
+        
+    '''
